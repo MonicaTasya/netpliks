@@ -29,11 +29,23 @@ const buttonVariants = cva(
 interface ButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
     children: ReactNode;
+    isActive?: boolean;
 }
 
-function Button({ className, variant, size, children, ...props }: ButtonProps) {
+function Button({ className, variant, size, children, isActive = false, ...props }: ButtonProps) {
+    const activeVariantClass =
+        variant === "gray"
+            ? "bg-gray-800 text-white ring-1 ring-gray-500"
+            : "bg-black/70 border-gray-500 text-white ring-1 ring-gray-500";
+
     return (
-        <button className={cn(buttonVariants({ variant, size }), className)} {...props}>
+        <button
+            className={cn(
+                buttonVariants({ variant, size }),
+                isActive && activeVariantClass,
+                className
+            )}
+            {...props}>
             {children}
         </button>
     );
