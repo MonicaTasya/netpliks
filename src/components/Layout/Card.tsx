@@ -37,7 +37,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
             <div className="flex flex-row items-center justify-between p-4">
                 <Link href={`/movies/${movie.id}`}>
                     <h3
-                        className="w-40 text-lg font-bold wrap-break-word transition-colors hover:text-blue-500 md:text-base"
+                        className="w-40 text-lg font-bold wrap-break-word transition-colors hover:text-red-900 md:text-base"
                         title={movie.title}>
                         {movie.title || "Untitled Movie"}
                     </h3>
