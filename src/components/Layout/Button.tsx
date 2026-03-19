@@ -7,7 +7,7 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                glass: "text-white font-bold has-[>svg]:gap-2 shadow-xl backdrop-blur-md bg-black/30 border border-gray-600 hover:bg-black/50 active:bg-black/30 active:shadow-none",
+                glass: "text-white font-bold has-[>svg]:gap-2 shadow-xl backdrop-blur-md bg-white/10 dark:bg-black/30 border border-gray-400 dark:border-gray-600 hover:bg-black/50 dark:hover:bg-white/50 active:bg-black/30 active:shadow-none",
                 gray: "bg-gray-700 text-white hover:bg-gray-600 active:bg-gray-700 active:shadow-none",
             },
             size: {
@@ -36,7 +36,7 @@ function Button({ className, variant, size, children, isActive = false, ...props
     const activeVariantClass =
         variant === "gray"
             ? "bg-gray-800 text-white ring-1 ring-gray-500"
-            : "bg-black/70 border-gray-500 text-white ring-1 ring-gray-500";
+            : "bg-black/70 dark:bg-white/50 border-gray-500 text-white ring-1 ring-gray-500";
 
     return (
         <button

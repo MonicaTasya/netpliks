@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { FavoriteProvider } from "@/src/components/Context/FavoriteContext";
+import { ThemeProvider } from "@/src/components/Context/ThemeContext";
 import Navbar from "@/src/components/Layout/Navbar";
 
 const geistSans = Geist({
@@ -26,11 +27,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <FavoriteProvider>
-                    <Navbar />
-                    {children}
-                </FavoriteProvider>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} bg-red-900 text-black antialiased dark:bg-gray-800 dark:text-white`}>
+                <ThemeProvider>
+                    <FavoriteProvider>
+                        <Navbar />
+                        {children}
+                    </FavoriteProvider>
+                </ThemeProvider>
             </body>
         </html>
     );

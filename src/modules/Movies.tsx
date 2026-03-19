@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Layout/Card";
 import { Button } from "../components/Layout/Button";
+import Skeleton from "../components/Layout/Skeleton";
 
 interface Movie {
     id: number;
@@ -65,15 +66,15 @@ const genres: Genre[] = [
 
 export default function MovieList() {
     const [movies, setMovies] = useState<Movie[]>([]);
-    const [selectedGenre, setSelectedGenre] = useState(""); // State untuk filter
-    const [searchTerm, setSearchTerm] = useState(""); // State untuk search
+    const [selectedGenre, setSelectedGenre] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
     const [debouncedTerm, setDebouncedTerm] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchMovies() {
             setLoading(true);
-            // Jika genre dipilih, tembak API discover. Jika tidak, tembak trending.
+
             const url = selectedGenre
                 ? `https://api.themoviedb.org/3/discover/movie?with_genres=${selectedGenre}`
                 : `https://api.themoviedb.org/3/discover/movie`;
@@ -83,7 +84,7 @@ export default function MovieList() {
             });
             if (!res.ok) {
                 console.error("Gagal ambil data:", res.statusText);
-                setMovies([]); // Set kosong biar gak error filter
+                setMovies([]);
                 setLoading(false);
                 return;
             }
@@ -93,20 +94,16 @@ export default function MovieList() {
         }
 
         fetchMovies();
-    }, [selectedGenre]); // <--- EFEK INI JALAN TIAP genre BERUBAH
+    }, [selectedGenre]);
 
-    // Search tetap dilakukan secara lokal dari hasil fetch terbaru
     const displayedMovies =
         movies.filter((m) => m.title.toLowerCase().includes(debouncedTerm.toLowerCase())) || [];
 
     useEffect(() => {
-        // 1. Pasang timer (tunggu 500ms)
         const handler = setTimeout(() => {
             setDebouncedTerm(searchTerm);
         }, 500);
 
-        // 2. Trik Ajaib: "Cleanup Function"
-        // Kalau user ngetik lagi SEBELUM 500ms, timer yang lama DIHAPUS
         return () => {
             clearTimeout(handler);
         };
@@ -114,7 +111,7 @@ export default function MovieList() {
 
     return (
         <div>
-            {/* Tombol Filter - Mengubah State */}
+            {/* Tombol Filter */}
             <div className="scrollbar-hide mb-4 flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden">
                 {genres.map((genre) => (
                     <Button
@@ -127,20 +124,34 @@ export default function MovieList() {
                 ))}
             </div>
 
+            {/*  Search Bar */}
             <input
                 type="text"
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Cari..."
-                className="mb-4 w-full rounded-lg border border-gray-600 bg-black/30 p-2 text-white shadow-xl backdrop-blur-md"
+                className="mb-4 w-full rounded-lg border border-gray-400 bg-white/10 p-2 text-white shadow-xl backdrop-blur-md dark:border-gray-600 dark:bg-black/30"
             />
 
+            <p className="p-4 text-3xl font-bold text-white">
+                {genres.find((g) => g.id.toString() === selectedGenre)?.name || "Trending"}
+            </p>
+
             {loading ? (
-                <div>Loading...</div>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:gap-15">
+                    {Array.from({ length: 8 }).map((_, index) => (
+                        <Skeleton key={index} />
+                    ))}
+                </div>
             ) : (
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-15">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:gap-15">
                     {displayedMovies.map((movie) => (
                         <Card key={movie.id} movie={movie} />
                     ))}
+                </div>
+            )}
+            {!loading && displayedMovies.length === 0 && (
+                <div className="py-20 text-center text-xl text-gray-500">
+                    Yah, film gak ketemu nih... :(
                 </div>
             )}
         </div>

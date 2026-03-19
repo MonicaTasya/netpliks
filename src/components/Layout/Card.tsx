@@ -21,7 +21,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
         : "/notfound.webp";
 
     return (
-        <div className="group relative flex h-100 flex-col overflow-hidden rounded-lg bg-black text-white shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100 dark:shadow-none">
+        <div className="group relative flex h-100 flex-col overflow-hidden rounded-lg bg-white text-black shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md dark:border dark:border-gray-800 dark:bg-black dark:text-white">
             {/* Bagian Gambar */}
             <Link href={`/movies/${movie.id}`} className="relative aspect-2/3 overflow-hidden">
                 <Image
@@ -37,7 +37,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
             <div className="flex flex-row items-center justify-between p-4">
                 <Link href={`/movies/${movie.id}`}>
                     <h3
-                        className="w-40 text-sm font-bold wrap-break-word transition-colors hover:text-blue-500 md:text-base"
+                        className="w-40 text-lg font-bold wrap-break-word transition-colors hover:text-blue-500 md:text-base"
                         title={movie.title}>
                         {movie.title || "Untitled Movie"}
                     </h3>

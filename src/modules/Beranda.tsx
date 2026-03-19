@@ -1,5 +1,8 @@
 import Card from "../components/Layout/Card";
 import DefaultLayout from "../components/Layout/DefaultLayout";
+import { Button } from "../components/Layout/Button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 interface Movie {
     id: number;
@@ -28,9 +31,18 @@ export default async function Beranda() {
     const movies = data.results;
 
     return (
-        <section className="bg-red-900 dark:bg-gray-900 dark:text-white">
+        <section>
             <DefaultLayout className="flex items-center justify-center">
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-15">
+                <div className="flex flex-row items-center gap-1">
+                    <p className="p-4 text-3xl font-bold text-white">Trending</p>
+                    <Link href="/movies">
+                        <Button variant="glass">
+                            {" "}
+                            Lebih banyak <ArrowRight />
+                        </Button>
+                    </Link>
+                </div>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:gap-15">
                     {movies.map((movie: Movie) => (
                         <Card key={movie.id} movie={movie} />
                     ))}

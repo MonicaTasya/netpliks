@@ -14,7 +14,7 @@ const DefaultLayout = ({ className, children, ...props }: DefaultLayoutProps) =>
                 className
             )}
             {...props}>
-            <div className="relative w-full max-w-360">{children}</div>
+            <div className="relative w-full max-w-360 bg-transparent">{children}</div>
         </section>
     );
 };
