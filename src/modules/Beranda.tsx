@@ -38,7 +38,7 @@ export default async function Beranda() {
                     <Link href="/movies">
                         <Button variant="glass">
                             {" "}
-                            Lebih banyak <ArrowRight />
+                            More <ArrowRight />
                         </Button>
                     </Link>
                 </div>

@@ -14,6 +14,7 @@ interface MovieDetail {
     release_date: string;
     poster_path: string;
     backdrop_path: string;
+    vote_average: number;
 }
 
 export default function MovieDetailPage() {
@@ -35,14 +36,14 @@ export default function MovieDetailPage() {
         if (id) fetchDetail();
     }, [id]);
 
-    if (loading) return <div className="p-8 text-white">Memuat Detail Film...</div>;
-    if (!movie) return <div className="p-8 text-white">Film tidak ditemukan.</div>;
+    if (loading) return <div className="p-8 text-white">Load Detail Film...</div>;
+    if (!movie) return <div className="p-8 text-white">Not Found.</div>;
 
     return (
         <div className="md:p-10">
             <Link href="/movies">
                 <Button className="mb-5" variant="glass">
-                    <ArrowLeft /> Kembali
+                    <ArrowLeft /> Back
                 </Button>
             </Link>
             <div className="flex flex-col gap-8 rounded-xl bg-black p-20 lg:flex-row">
@@ -57,13 +58,22 @@ export default function MovieDetailPage() {
 
                 {/* Detail */}
                 <div className="flex flex-col items-start justify-end">
-                    <p className="text-lg font-bold text-red-500">NETPLIKS</p>
-                    <h1 className="text-xl font-bold text-white md:text-4xl">{movie.title}</h1>
-                    <p className="md:text-md text-sm text-gray-300">Rilis: {movie.release_date}</p>
-                    {/* Tombol Favorit */}
+                    <div className="flex flex-col gap-2">
+                        <p className="text-lg font-bold text-red-500">NETPLIKS</p>
+                        <h1 className="text-xl font-bold text-white md:text-4xl">{movie.title}</h1>
+                        <div>
+                            <p className="text-lg font-semibold">
+                                Rate: {movie.vote_average?.toFixed(1) || "N/A"}
+                            </p>
+                            <p className="md:text-md text-sm text-gray-300">
+                                Release: {movie.release_date}
+                            </p>
+                        </div>
+                    </div>
+                    {/* Button Favorit */}
                     <div className="my-5 flex flex-row gap-5">
                         <Link href="/favorites">
-                            <Button variant="glass">Lihat Favorit</Button>
+                            <Button variant="glass">My Favorites</Button>
                         </Link>
                         <Button
                             variant="glass"
@@ -80,7 +90,7 @@ export default function MovieDetailPage() {
                     </div>
                     {/* Overview */}
                     <p className="leading-relaxed text-white">
-                        {movie.overview || "Deskripsi tidak tersedia."}
+                        {movie.overview || "Description not available."}
                     </p>
                 </div>
             </div>

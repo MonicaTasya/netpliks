@@ -13,13 +13,15 @@ export default function FavoritesPage() {
             <div className="mb-10 flex flex-row items-center gap-2">
                 <Link href="/movies">
                     <Button variant="glass">
-                        <ArrowLeft /> Kembali
+                        <ArrowLeft /> Back
                     </Button>
                 </Link>
-                <h1 className="text-2xl font-bold text-white">Film Favorit Saya</h1>
+                <h1 className="text-2xl font-bold text-white">My Favorite Movies</h1>
             </div>
             {favorites.length === 0 ? (
-                <p className="text-center text-xl font-semibold">Belum ada film favorit.</p>
+                <p className="text-center text-xl font-semibold">
+                    You have no favorite movies yet.
+                </p>
             ) : (
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:gap-15">
                     {favorites.map((movie) => (

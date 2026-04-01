@@ -1,13 +1,11 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 
-// 1. Definisi tipe data film
 interface Movie {
     id: number;
     title: string;
 }
 
-// 2. Definisi isi "Gudang" kita
 interface FavoriteContextType {
     favorites: Movie[];
     addToFavorite: (movie: Movie) => void;
@@ -30,7 +28,7 @@ export function FavoriteProvider({ children }: { children: ReactNode }) {
         setFavorites((prev) => prev.filter((m) => m.id !== movieId));
     };
 
-    // Fungsi Cek apakah sudah favorit (buat ganti warna tombol)
+    // Fungsi Cek favorit
     const isFavorite = (movieId: number) => {
         return favorites.some((m) => m.id === movieId);
     };
@@ -43,7 +41,7 @@ export function FavoriteProvider({ children }: { children: ReactNode }) {
     );
 }
 
-// Hook ajaib biar gampang manggilnya
+// Hook buat manggil
 export const useFavorites = () => {
     const context = useContext(FavoriteContext);
     if (!context) throw new Error("useFavorites harus di dalam FavoriteProvider");

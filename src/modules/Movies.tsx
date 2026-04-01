@@ -151,7 +151,7 @@ export default function MovieList() {
             )}
             {!loading && displayedMovies.length === 0 && (
                 <div className="py-20 text-center text-xl text-gray-500">
-                    Yah, film gak ketemu nih... :(
+                    Yah, film yg kamu cari gak ketemu... :(
                 </div>
             )}
         </div>

@@ -22,7 +22,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
 
     return (
         <div className="group relative flex h-100 flex-col overflow-hidden rounded-lg bg-white text-black shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md dark:border dark:border-gray-800 dark:bg-black dark:text-white">
-            {/* Bagian Gambar */}
+            {/* Image */}
             <Link href={`/movies/${movie.id}`} className="relative aspect-2/3 overflow-hidden">
                 <Image
                     width={100}
@@ -33,7 +33,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                 />
             </Link>
 
-            {/* Bagian Konten */}
+            {/* Detail */}
             <div className="flex flex-row items-center justify-between p-4">
                 <Link href={`/movies/${movie.id}`}>
                     <h3
@@ -43,7 +43,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                     </h3>
                 </Link>
 
-                {/* Tombol Favorit */}
+                {/* Button Favorit */}
                 <Button
                     variant="gray"
                     size="smIcon"
