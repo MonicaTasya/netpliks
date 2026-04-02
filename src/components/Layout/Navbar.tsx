@@ -29,7 +29,9 @@ const Navbar = () => {
             <nav className="fixed top-0 left-0 z-60 w-full rounded-b-2xl bg-white px-5 py-5 text-black shadow-sm drop-shadow-lg 2xl:px-8 2xl:py-6 dark:bg-black dark:text-red-500">
                 <div className="flex flex-row justify-between md:px-10">
                     <Link href="/">
-                        <h1 className="text-3xl font-extrabold">NETPLIKS</h1>
+                        <h1 className="text-3xl font-extrabold duration-300 hover:scale-105">
+                            NETPLIKS
+                        </h1>
                     </Link>
                     {!isMobile ? (
                         <div className="flex flex-row items-center gap-4 text-lg">
@@ -62,7 +64,7 @@ const Navbar = () => {
                             </Button>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="p-2 text-black dark:text-red-600">
+                                className="p-2 text-black hover:cursor-pointer dark:text-red-600">
                                 {isOpen ? <X size={28} /> : <Menu size={28} />}
                             </button>
                         </div>
