@@ -62,7 +62,7 @@ export default function MovieDetailPage() {
                         <p className="text-lg font-bold text-red-500">NETPLIKS</p>
                         <h1 className="text-xl font-bold text-white md:text-4xl">{movie.title}</h1>
                         <div>
-                            <p className="text-lg font-semibold">
+                            <p className="text-lg font-semibold text-white">
                                 Rate: {movie.vote_average?.toFixed(1) || "N/A"}
                             </p>
                             <p className="md:text-md text-sm text-gray-300">
